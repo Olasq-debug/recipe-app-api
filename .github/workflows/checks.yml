@@ -7,12 +7,12 @@ jobs:
     test-lint:
         name: Test and Lint
         runs-on: ubuntu-20.04
-        steps:
-            - name: Login To Docker Hub
-              run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-              
+        steps:  
             - name: Checkout
               uses: actions/checkout@v2
+            - name: Login To Docker Hub
+              run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
             - name: Test
               uses: docker-compose run --rm app sh -c "python manage.py test"
             - name: Lint
